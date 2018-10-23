@@ -3,21 +3,22 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import generics.*;
 import interfaces.*;
 
 public class FIBA {
 	
-	private IRedBlackTree players;
-	private IRedBlackTree statmentDouble;
+	private IRedBlackTree<Player> players;
+	private IRedBlackTree<Player> statmentDouble;
 //	private IAvlTree StatmentInt;
 	
 	
 	public FIBA() {
 		
-	players = new RedBlackTree();
-	statmentDouble = new RedBlackTree();
+	players = new RedBlackTree<Player>();
+	statmentDouble = new RedBlackTree<Player>();
 //	statmentInt = new AvlTree();
 	addPlayerDefault();
 
@@ -25,12 +26,12 @@ public class FIBA {
 	}
 	
 	
-	public IRedBlackTree getPlayers() {
+	public IRedBlackTree<Player> getPlayers() {
 		return players;
 	}
 
 
-	public void setPlayers(IRedBlackTree players) {
+	public void setPlayers(IRedBlackTree<Player>  players) {
 		this.players = players;
 	}
 
@@ -128,7 +129,49 @@ public class FIBA {
 	}
 	
 	
+	public ArrayList<Player> getHighests(Player player) {
+		
+		try {
+			
+			players.getRoot().getNode(player);
+			
+			return players.getHighests(player);
+			
+			
+		} catch (ElementoNoExisteException e) {
+			// TODO Auto-generated catch block
+			
+			players.insertRB(player);
+			ArrayList<Player> list = players.getHighests(player);
+			players.deleteRB(player);
+			
+			return list;	
+			
+		}
+			
+	}
 	
+	public ArrayList<Player> getLess(Player player) {
+		
+		try {
+			
+			players.getRoot().getNode(player);
+			
+			return players.getLess(player);
+			
+			
+		} catch (ElementoNoExisteException e) {
+			// TODO Auto-generated catch block
+			
+			players.insertRB(player);
+			ArrayList<Player> list = players.getLess(player);
+			players.deleteRB(player);
+			
+			return list;	
+			
+		}
+			
+	}
 	
 
 }

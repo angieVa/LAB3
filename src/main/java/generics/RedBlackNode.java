@@ -272,7 +272,33 @@ public class RedBlackNode<A extends Comparable<A>> {
 	 }
 	 
 	 
-	 
+		public ArrayList<A> highests(ArrayList<A> list, RedBlackNode<A> x){
+			
+			if(x.RChild != null) {
+				
+				list.add(x.RChild.elem);
+				return highests(list, x.RChild);
+			}else{
+				
+				return list;
+			}
+			
+			
+		}
+		
+		public ArrayList<A> less(ArrayList<A> list, RedBlackNode<A> x){
+			
+			if(x.LChild != null) {
+				
+				list.add(x.LChild.elem);
+				return highests(list, x.LChild);
+			}else{
+				
+				return list;
+			}
+			
+			
+		}
 	 
 
 }

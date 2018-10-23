@@ -20,6 +20,8 @@ public interface IRedBlackTree<A extends Comparable<A>> {
 	public void preOrder();
 	public void postOrder(RedBlackNode<A> r);
 	public ArrayList<A> getElements();
+	public ArrayList<A> getHighests(A elem);
+	public ArrayList<A> getLess(A elem);
 	
 	
 	
