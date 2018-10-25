@@ -164,11 +164,11 @@ public class FIBA implements Serializable{
 				gamesT.insert(player);
 				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 2);
 				mpT.insert(player);
-				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 2);
+				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 3);
 				perT.insertRB(player);
-				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 2);
+				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 4);
 				tsT.insertRB(player);
-				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 2);
+				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 5);
 				ftrT.insertRB(player);
 				line = br.readLine();
 				
