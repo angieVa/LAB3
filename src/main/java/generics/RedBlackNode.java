@@ -300,6 +300,6 @@ public class RedBlackNode<A extends Comparable<A>> implements Serializable{
 			
 			
 		}
-	 
+
 
 }
