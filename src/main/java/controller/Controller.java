@@ -294,31 +294,31 @@ public class Controller implements Initializable{
     	
     	if(options.getValue().equals("Sorted by games")) {
     		
-    		list.getItems().removeAll();
+    		list.getItems().remove(0, list.getItems().size());
     		list.getItems().addAll();
     		
     		
     	} else if(options.getValue().equals("Sorted by mp")) {
     		
-    		list.getItems().removeAll();
+    		list.getItems().remove(0, list.getItems().size());
     		list.getItems().addAll();
-    		list.refresh();
     		
     	} else if(options.getValue().equals("Sorted by per")) {
     		
-    		list.getItems().removeAll();
+    		list.getItems().clear();
+    		fiba.getPerT().inOrder();
     		list.getItems().addAll(fiba.getPer());
-    		list.refresh();
     		
     	} else if(options.getValue().equals("Sorted by ts")) {
     		
     		list.getItems().clear();
+    		fiba.getTsT().inOrder();
     		list.getItems().addAll(fiba.getTs());
-    		list.refresh();
     		
     	} else if(options.getValue().equals("Sorted by ftr")) {
     		
     		list.getItems().clear();
+    		fiba.getFtrT().inOrder();
     		list.getItems().addAll(fiba.getFtr());
     		list.refresh();
     		
@@ -355,13 +355,6 @@ public class Controller implements Initializable{
 
     }
     
-    public void deletePlayer() {
-    	
-//    	String name = playerToDeleteTx.getText();
-//    	Player p = new Player()
-    	
-    }
-
     @FXML
     void butDelete(ActionEvent event) {
 
