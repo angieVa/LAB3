@@ -12,7 +12,8 @@ public class PlayerTest extends TestCase {
 
 	
 	private Player player1; 
-	private Player player2; 
+	private Player player2;
+	
 	void stageOne() {
 		
 		player1 =  new Player("2000", "BlueBirds", "Cami", 23, 3, 4, 34, 21, 12, 1);
@@ -24,6 +25,8 @@ public class PlayerTest extends TestCase {
 	
 	@Test
 	public void testCompareTo() {
+		
+		 stageOne();
 		
 		int resulta = player1.compareTo(player2);
 		
