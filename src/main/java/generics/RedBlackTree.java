@@ -516,10 +516,7 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		
 		elements.clear();
 //		root.less(elem);
-		
-		
-		
-		
+		return null;
 	}		
 
 		
@@ -534,8 +531,20 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 //			e.printStackTrace();
 //			return null;
 //		}
-		
-	}
+
+//		RedBlackNode<A> x;
+//		try {
+//			x = root.getNode(elem);
+//			return root.less(elements, x.getLChild());
+//			
+//		} catch (ElementoNoExisteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return null;
+//		}
+//
+//		
+//	}
 
 	@Override
 	public ArrayList<A> getHighests(A elem) {

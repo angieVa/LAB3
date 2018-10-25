@@ -19,8 +19,8 @@ public class FIBA implements Serializable{
 	private IRedBlackTree<Player> tsT;
 	private IRedBlackTree<Player> ftrT;
 	
-	private IAVLTree<Player> gamesT;
-	private IAVLTree<Player> mpT;
+	private ArbolAVL<Player> gamesT;
+	private ArbolAVL<Player> mpT;
 	
 	
 	public FIBA() {
@@ -29,8 +29,8 @@ public class FIBA implements Serializable{
 	perT = new RedBlackTree<Player>();
 	tsT = new RedBlackTree<Player>();
 	ftrT = new RedBlackTree<Player>();
-	gamesT = new AVLTree<Player>();
-	mpT = new AVLTree<Player>();
+	gamesT = new ArbolAVL<Player>();
+	mpT = new ArbolAVL<Player>();
 	
 	
 	addPlayerDefault();
@@ -76,25 +76,25 @@ public class FIBA implements Serializable{
 
 
 
-	public IAVLTree<Player> getGamesT() {
+	public ArbolAVL<Player> getGamesT() {
 		return gamesT;
 	}
 
 
 
-	public void setGamesT(IAVLTree<Player> gamesT) {
+	public void setGamesT(ArbolAVL<Player> gamesT) {
 		this.gamesT = gamesT;
 	}
 
 
 
-	public IAVLTree<Player> getMpT() {
+	public ArbolAVL<Player> getMpT() {
 		return mpT;
 	}
 
 
 
-	public void setMpT(IAVLTree<Player> mpT) {
+	public void setMpT(ArbolAVL<Player> mpT) {
 		this.mpT = mpT;
 	}
 
@@ -165,9 +165,9 @@ public class FIBA implements Serializable{
 				Player player = new Player(year, team, name, age, games, mp, per, ts, ftr, 0);
 				players.insertRB(player);
 				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 1);
-				gamesT.insert(player);
+				gamesT.insertar(player);
 				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 2);
-				mpT.insert(player);
+				mpT.insertar(player);
 				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 3);
 				perT.insertRB(player);
 				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 4);
@@ -206,11 +206,21 @@ public class FIBA implements Serializable{
 			
 		} else if(p.getType() == 1) {
 			
-			gamesT.insert(p);
+			try {
+				gamesT.insertar(p);
+			} catch (ElementoExisteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} else if(p.getType() == 2) {
 			
-			mpT.insert(p);
+			try {
+				mpT.insertar(p);
+			} catch (ElementoExisteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} else if(p.getType() == 3) {
 			
@@ -280,7 +290,7 @@ public class FIBA implements Serializable{
 	}
 	
 	public void getLess(Player player){
-		
+
 		if(player.getType() == 3) {
 			
 			try {
@@ -293,6 +303,22 @@ public class FIBA implements Serializable{
 				perT.getLess(player);
 				perT.deleteRB(player);
 			
+			}
+			
+		} else if(player.getType() == 4) {
+
+	if(player.getType() == 3) {
+			
+			try {
+				perT.getRoot().getNode(player);
+				perT.getLess(player);
+				
+			} catch (ElementoNoExisteException e) {
+				
+				perT.insertRB(player);
+				perT.getLess(player);
+				perT.deleteRB(player);
+				
 			}
 			
 		} else if(player.getType() == 4) {
@@ -325,6 +351,43 @@ public class FIBA implements Serializable{
 			
 		}
 		
+		
+	}
+
+//	public ArrayList<Player> getSame(Player player){
+//		
+//		try {
+//			players.getRoot().getNode(player);
+//
+//			
+//			try {
+//				tsT.getRoot().getNode(player);
+//				tsT.getLess(player);
+//				
+//			} catch (ElementoNoExisteException e) {
+//				
+//				tsT.insertRB(player);
+//				tsT.getLess(player);
+//				tsT.deleteRB(player);
+//				
+//			}
+//			
+//		} else if(player.getType() == 5) {
+//			
+//			try {
+//				ftrT.getRoot().getNode(player);
+//				ftrT.getLess(player);
+//				
+//			} catch (ElementoNoExisteException e) {
+//				
+//				ftrT.insertRB(player);
+//				ftrT.getLess(player);
+//				ftrT.deleteRB(player);
+//				
+//			}
+//			
+//		}
+//		
 		
 //		try {
 //			
@@ -410,11 +473,21 @@ public class FIBA implements Serializable{
 			
 		} else if(elem.getType() == 1) {
 			
-			gamesT.delete(elem);
+			try {
+				gamesT.eliminar(elem);
+			} catch (ElementoNoExisteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} else if(elem.getType() == 2) {
 			
-			mpT.delete(elem);
+			try {
+				mpT.eliminar(elem);
+			} catch (ElementoNoExisteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		} else if(elem.getType() == 3) {
 			
