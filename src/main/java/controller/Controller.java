@@ -1,9 +1,17 @@
 package controller;
 
 import model.*;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import generics.RedBlackNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class Controller implements Initializable{
 
@@ -79,7 +88,7 @@ public class Controller implements Initializable{
     private TextField playerToDeleteTx;
 
     @FXML
-    private ListView<String> list;
+    private ListView<Player> list;
 
     @FXML
     private Label ftrTitle;
@@ -221,57 +230,32 @@ public class Controller implements Initializable{
 
     public void addOptions() {
     	
-    	options.getItems().add("games less than");
-    	options.getItems().add("games greather than");
-    	options.getItems().add("games same as");
-    	options.getItems().add("mp less than");
-    	options.getItems().add("mp greather than");
-    	options.getItems().add("mp same as");
-    	options.getItems().add("per less than");
-    	options.getItems().add("per greather than");
-    	options.getItems().add("per same as");
-    	options.getItems().add("ts less than");
-    	options.getItems().add("ts greather than");
-    	options.getItems().add("ts same as");
-    	options.getItems().add("ftr less than");
-    	options.getItems().add("ftr greather than");
-    	options.getItems().add("ftr same as");
-    	fiba.getPlayers().inOrder();
-    	
-    	for(int i=0; i<1; i++) {	
-    		Player play = (Player) fiba.getPlayers().getElements().get(i);
-    		System.out.print(play.getName());
-    	}
-    	
-    	
-    	
+    	options.getItems().add("Sorted by games");
+    	options.getItems().add("Sorted by mp");
+    	options.getItems().add("Sorted by per");
+    	options.getItems().add("Sorted by ts");
+    	options.getItems().add("Sorted by ftr");
+    	options.getItems().add("Games less than");
+    	options.getItems().add("Games greather than");
+    	options.getItems().add("Games same as");
+    	options.getItems().add("Mp less than");
+    	options.getItems().add("Mp greather than");
+    	options.getItems().add("Mp same as");
+    	options.getItems().add("Per less than");
+    	options.getItems().add("Per greather than");
+    	options.getItems().add("Per same as");
+    	options.getItems().add("Ts less than");
+    	options.getItems().add("Ts greather than");
+    	options.getItems().add("Ts same as");
+    	options.getItems().add("Ftr less than");
+    	options.getItems().add("Ftr greather than");
+    	options.getItems().add("Ftr same as");
+    		
     }
     
-    public void initPlayers() {
-    	
-    	Player p = (Player) fiba.getPlayers().getElements().get(0);
-    	list.getItems().add(p.getName());
-    	
-    	for(int i=1; i<17263; i++) {
-    		
-    		Player play = (Player) fiba.getPlayers().getElements().get(i);
-    		Player playA = (Player) fiba.getPlayers().getElements().get(i-1);
-    		if(!play.getName().equalsIgnoreCase(playA.getName())) {
-    			
-    			list.getItems().add(play.getName());
-    			
-    		}
-    		
-    		
-    	}
-    	
-    	
-    }
-    
-    public void information() {
-    	
-    	int pos = list.getEditingIndex();
-    	Player p = (Player) fiba.getPlayers().getElements().get(pos+1);
+    @FXML
+    void update(MouseEvent event) {
+    	Player p = list.getSelectionModel().getSelectedItem();
     	nameTxt.setText(p.getName());
     	yearTxt.setText(p.getYear());
     	teamTxt.setText(p.getTeam());
@@ -281,24 +265,154 @@ public class Controller implements Initializable{
     	perTxt.setText(String.valueOf(p.getPer()));
     	tsTxt.setText(String.valueOf(p.getTs()));
     	ftrTxt.setText(String.valueOf(p.getFtr()));
-    	
-    	
     }
     
+    public void initPlayers() {
+    	
+    	fiba.getPlayers().inOrder();
+
+    	Player p = fiba.getp().get(0);
+    	list.getItems().add(p);
+    	
+    	for(int i=1; i<fiba.getp().size(); i++) {
+    		
+    		Player p1 = fiba.getp().get(i);
+    		Player p2 = fiba.getp().get(i-1);
+    		
+    		if(!p1.getName().equals(p2.getName())) {
+    			
+    			list.getItems().add(p1);
+    			
+    		}
+    		
+    	}
+    	
+    }	
     
+        
     @FXML
     void find(ActionEvent event) {
+    	
+    	if(options.getValue().equals("Sorted by games")) {
+    		
+    		list.getItems().clear();
+    		fiba.getGamesT().inOrder();
+    		list.getItems().addAll(fiba.getGames());
+    		
+    		
+    	} else if(options.getValue().equals("Sorted by mp")) {
+    		
+    		list.getItems().clear();
+    		fiba.getMpT().inOrder();
+    		list.getItems().addAll(fiba.getMp());
+    		
+    	} else if(options.getValue().equals("Sorted by per")) {
+    		
+    		list.getItems().clear();
+    		fiba.getPerT().inOrder();
+    		list.getItems().addAll(fiba.getPer());
+    		
+    	} else if(options.getValue().equals("Sorted by ts")) {
+    		
+    		list.getItems().clear();
+    		fiba.getTsT().inOrder();
+    		list.getItems().addAll(fiba.getTs());
+    		
+    	} else if(options.getValue().equals("Sorted by ftr")) {
+    		
+    		list.getItems().clear();
+    		fiba.getFtrT().inOrder();
+    		list.getItems().addAll(fiba.getFtr());
+    		list.refresh();
+    		
+    	} else if(options.getValue().equals("Per greather than")) {
+    		
+    		list.getItems().clear();
+    		double val = Double.parseDouble(standardValue.getText());
+    		Player p = new Player("","","",0,0,0,val,0,0,3);
+    		fiba.getHighest(p);
+    		list.getItems().addAll(fiba.getPer());
+    		list.refresh();
+    		
+    	}
 
     }
 
     @FXML
     void butAddPlayer(ActionEvent event) {
+    	
+    	String name = nameTx.getText();
+    	String year = yearTx.getText();
+    	String team = teamTx.getText();
+    	int age = Integer.parseInt(ageTx.getText());
+    	int games = Integer.parseInt(gamesTx.getText());
+    	int mp = Integer.parseInt(mpTx.getText());
+    	double per = Double.parseDouble(perTx.getText());
+    	double ts = Double.parseDouble(tsTx.getText());
+    	double ftr = Double.parseDouble(ftrTx.getText());
+    	Player p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,0);
+    	fiba.addNewPlayer(p1);
+    	p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,1);
+		fiba.addNewPlayer(p1);
+		p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,2);
+		fiba.addNewPlayer(p1);
+		p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,3);
+		fiba.addNewPlayer(p1);
+		p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,4);
+		fiba.addNewPlayer(p1);	  
+		p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,5);
+		fiba.addNewPlayer(p1);		
+
+    	serialize();	
 
     }
-
+    
     @FXML
     void butDelete(ActionEvent event) {
+    	
+    	String name = playerToDeleteTx.getText();
+    	Player pl = new Player("", "",name,0,0,0,0,0,0,0);
+    	
+    	RedBlackNode<Player> p = fiba.getPlayers().search(pl, fiba.getPlayers().getRoot());
 
+//    	fiba.delete(p.getInfoNode());
+
+    	fiba.delete(p.getInfoNode());
+    	list.getItems().remove(p.getInfoNode());
+
+    	
+    	
+    	Player p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),0);
+    	fiba.delete(p1);
+    	p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),1);
+    	fiba.delete(p1);
+		p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),2);
+		fiba.delete(p1);
+		p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),3);
+		fiba.delete(p1);
+		p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),4);
+		fiba.delete(p1);	  
+		p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),5);
+		fiba.delete(p1);	
+		
+		list.getItems().clear();
+		fiba.getPlayers().inOrder();
+
+    	Player pla = fiba.getp().get(0);
+    	list.getItems().add(pla);
+    	
+    	for(int i=1; i<fiba.getp().size(); i++) {
+    		
+    		Player pl1 = fiba.getp().get(i);
+    		Player pl2 = fiba.getp().get(i-1);
+    		
+    		if(!p1.getName().equals(pl2.getName())) {
+    			
+    			list.getItems().add(pl1);
+    			
+    		}
+    		
+    	}
     }
 
     @FXML
@@ -309,9 +423,89 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL Location, ResourceBundle resources) {
 		
+//		read();
+		serialize(); //Colocarlo donde agregue un jugador y donde elimino 
 		addOptions();
 		initPlayers();
-		information();
+		list.refresh();
+		
+	}
+	
+	public void read() {
+		
+		FileInputStream fos = null;
+		ObjectInputStream ois = null;
+		
+		try {
+			fos = new FileInputStream("data/class.dat");
+			ois = new ObjectInputStream(fos);
+			try {
+				fiba = (FIBA) ois.readObject();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				ois.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+	}	
+		
+		
+	
+	
+	public void serialize() {
+		
+		FileOutputStream fos = null;
+		ObjectOutputStream ois = null;
+		
+		try {
+			fos = new FileOutputStream("data/class.dat",true);
+			ois = new ObjectOutputStream(fos);
+			ois.writeObject(fiba);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				ois.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
 		
 	}
 

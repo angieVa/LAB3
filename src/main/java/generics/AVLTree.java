@@ -1,14 +1,18 @@
 package generics;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import interfaces.IAVLTree;
 
-public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>{
+public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>, Serializable{
 
 	private AVLNode<A> root;
-	
+	private ArrayList<A> objects;
 	
 	public AVLTree() {
 		root = null;
+		objects = new ArrayList<A>();
 	}
 
 
@@ -16,7 +20,7 @@ public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>{
 	public AVLNode<A> buscar(A elem, AVLNode<A> r) {
 		if(root== null) {
 			return null;
-		}else if(r.getElem() == elem) {
+	}else if(r.getElem().compareTo(elem) == 0) {
 			return r;
 		}else if(r.getElem().compareTo(elem) < 0) {
 			return buscar(elem, r.getRChild());
@@ -92,7 +96,7 @@ public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>{
 		
 		AVLNode<A> nParent = subT;
 		
-		if(n.getElem().compareTo(subT.getElem())< 0) {
+		if(n.getElem().compareTo(subT.getElem()) <= 0) {
 			
 			if(subT.getLChild() == null) {
 				subT.setLChild(n);
@@ -100,7 +104,7 @@ public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>{
 				
 				subT.setLChild(insertAVL(n,subT.getLChild()));
 				if(getFE(subT.getLChild())- getFE(subT.getRChild()) == 2) {
-					if(n.getElem().compareTo(subT.getLChild().getElem()) <0) {
+					if(n.getElem().compareTo(subT.getLChild().getElem()) <= 0) {
 						
 						nParent = leftRotate(subT);
 						
@@ -166,17 +170,36 @@ public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>{
 	//RECORRIDOS
 
 	@Override
-	public void inOrder(AVLNode<A> r) {
+	public void inOrder() {
 		
-		if(r != null) {
-			inOrder(r.getLChild());
-			System.out.print(r.getElem() + ", ");
-			inOrder(r.getRChild());
-			
-		}
+		objects.clear();
+		auxInOrder(root);
 		
 	}
+	
+	
+	
+	public ArrayList<A> getObjects() {
+		return objects;
+	}
 
+
+	public void setObjects(ArrayList<A> objects) {
+		this.objects = objects;
+	}
+
+
+	public void auxInOrder(AVLNode<A> r) {
+		
+		if(r != null) {
+			auxInOrder(r.getLChild());
+			objects.add(r.getElem());
+			auxInOrder(r.getRChild());
+			
+		}
+	}
+
+	
 
 	@Override
 	public void preOrder(AVLNode<A> r) {

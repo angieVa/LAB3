@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class Player implements Comparable<Player> {
+public class Player implements Comparable<Player>, Serializable{
 	
 	private String year;
 	private String name;
@@ -123,17 +124,17 @@ public class Player implements Comparable<Player> {
 	public int compareTo(Player o) {
 		int result = 0;
 		
-		if(type == 0) {
+		if(o.getType() == 0) {
 			
 		return name.compareToIgnoreCase(o.getName());	
 			
-		} else if(type == 1) {
+		} else if(o.getType() == 1) {
 			
-			if(games<o.getGames()) {
+			if(this.games<o.getGames()) {
 				
 				result = -1;
 				
-			} else if(games>o.getGames()) {
+			} else if(this.games>o.getGames()) {
 				
 				result = 1;
 				
@@ -143,13 +144,13 @@ public class Player implements Comparable<Player> {
 				
 			}
 			
-		} else if (type == 2) {
+		} else if (o.getType() == 2) {
 			
-			if(mp<o.getMp()) {
+			if(this.mp<o.getMp()) {
 				
 				result = -1;
 				
-			} else if(mp>o.getMp()) {
+			} else if(this.mp>o.getMp()) {
 				
 				result = 1;
 				
@@ -159,13 +160,13 @@ public class Player implements Comparable<Player> {
 				
 			}
 			
-		} else if (type == 3) {
+		} else if (o.getType() == 3) {
 			
-			if(per<o.getPer()) {
+			if(this.per<o.getPer()) {
 				
 				result = -1;
 				
-			} else if(per>o.getPer()) {
+			} else if(this.per>o.getPer()) {
 				
 				result = 1;
 				
@@ -177,11 +178,11 @@ public class Player implements Comparable<Player> {
 			
 		} else if (type == 4) {
 			
-			if(ts<o.getTs()) {
+			if(this.ts<o.getTs()) {
 				
 				result = -1;
 				
-			} else if(ts>o.getTs()) {
+			} else if(this.ts>o.getTs()) {
 				
 				result = 1;
 				
@@ -193,11 +194,11 @@ public class Player implements Comparable<Player> {
 			
 		} else if (type == 5) {
 			
-			if(ftr<o.getFtr()) {
+			if(this.ftr<o.getFtr()) {
 				
 				result = -1;
 				
-			} else if(ftr>o.getFtr()) {
+			} else if(this.ftr>o.getFtr()) {
 				
 				result = 1;
 				
@@ -213,6 +214,8 @@ public class Player implements Comparable<Player> {
 	}
 
 
-	
+	public String toString() {
+		return name;
+	}
 
 }
