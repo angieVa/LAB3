@@ -273,22 +273,6 @@ public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>{
 		}
 	}
 	
-	@Override
-	public void delete( A elem) {
-		
-		AVLNode<A> buscado =  buscar(elem, root);
-	
-	
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 //	
 //	@Override
