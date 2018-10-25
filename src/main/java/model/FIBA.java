@@ -16,20 +16,20 @@ public class FIBA implements Serializable{
 	
 	private IRedBlackTree<Player> players;
 	private IRedBlackTree<Player> statmentDouble;
-//	private IAvlTree StatmentInt;
+	private IAVLTree<Player> statmentInt;
 	
 	
 	public FIBA() {
 		
-	players = new RedBlackTree();
-	statmentDouble = new RedBlackTree();
-//	statmentInt = new AvlTree();
+	players = new RedBlackTree<Player>();
+	statmentDouble = new RedBlackTree<Player>();
+	statmentInt = new AVLTree<Player>();
 //	addPlayerDefault();
 
 		
 	}
 	
-	public IRedBlackTree getPlayers() {
+	public IRedBlackTree<Player> getPlayers() {
 		return players;
 	}
 	
@@ -38,7 +38,7 @@ public class FIBA implements Serializable{
 	}
 
 
-	public void setPlayers(IRedBlackTree players) {
+	public void setPlayers(IRedBlackTree<Player> players) {
 		this.players = players;
 	}
 
