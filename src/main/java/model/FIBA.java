@@ -154,7 +154,25 @@ public class FIBA implements Serializable{
 		
 	}
 	
+	public ArrayList<Player> getLess(Player player){
+		
+		try {
+			players.getRoot().getNode(player);
+			
+			return players.getLess(player);
+			
+		} catch (ElementoNoExisteException e) {
+			
+			players.insertRB(player);
+			ArrayList<Player> list = players.getLess(player);
+			players.deleteRB(player);
+			return list;
+			
+		}
+		
+		
 	
-	
+		
+	}
 
 }
