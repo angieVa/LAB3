@@ -230,6 +230,7 @@ public class Controller implements Initializable{
 
     public void addOptions() {
     	
+    	options.getItems().add("Sorted by name");
     	options.getItems().add("Sorted by games");
     	options.getItems().add("Sorted by mp");
     	options.getItems().add("Sorted by per");
@@ -293,7 +294,30 @@ public class Controller implements Initializable{
     @FXML
     void find(ActionEvent event) {
     	
-    	if(options.getValue().equals("Sorted by games")) {
+    	if(options.getValue().equals("Sorted by name")) {
+    		
+    		list.getItems().clear();
+    		fiba.getGamesT().inOrder();
+    		
+    		Player p = fiba.getp().get(0);
+        	list.getItems().add(p);
+        	
+        	for(int i=1; i<fiba.getp().size(); i++) {
+        		
+        		Player p1 = fiba.getp().get(i);
+        		Player p2 = fiba.getp().get(i-1);
+        		
+        		if(!p1.getName().equals(p2.getName())) {
+        			
+        			list.getItems().add(p1);
+        			
+        		}
+        		
+        	}
+    	
+    		
+    		
+    	} else if(options.getValue().equals("Sorted by games")) {
     		
     		list.getItems().clear();
     		fiba.getGamesT().inOrder();
