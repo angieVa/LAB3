@@ -296,59 +296,61 @@ public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>, Serializab
 		}
 	}
 	
-	@Override
-	public void delete(A elem) {
-		
-		AVLNode<A> nodeE= buscar(elem,root);
-		
-		int R = 0;
-		if(nodeE.getRChild() != null) {
-			R = nodeE.getRChild().getFe();
-		}
-		
-		int L = 0;
-		
-		if(nodeE.getLChild() != null) {
-			L = nodeE.getLChild().getFe();
-			
-		}
-		
-		if(L-R == 0) {
-			buscar(elem,root).setElem(null);
-		}else if(L-R >= 1) {
-			
-			AVLNode<A> maxL = maxLeft(nodeE.getLChild());
-			if(nodeE.getLChild() != null) {
-			parent(maxLeft(nodeE.getLChild()),root).setLChild(nodeE.getLChild());
-			}
-			if(nodeE.getLChild() != null) {
-				parent(maxLeft(nodeE.getLChild()),root).getRChild().setLChild(nodeE.getRChild());
-			}	
-			buscar(elem,root).setElem(maxL.getElem());
-			
-			
-			
-		}else {
-			
-
-			AVLNode<A> minR = minRight(nodeE.getRChild());
-			buscar(elem,root).setElem(minR.getElem());
-			parent(minRight(nodeE.getRChild()),root).setRChild(null);
-		
-		}
-		
-//		if(getFE(nodeE) < 0) {
-//			
-//			AVLNode<A> maxL = maxLeft(nodeE.getLChild());
-//			
-//			nodeE.setElem(maxL.getElem());
-//			
-//			maxL = null;
-//			
+	
+//	
+//	@Override
+//	public void delete(A elem) {
+//		
+//		AVLNode<A> nodeE= buscar(elem,root);
+//		
+//		int R = 0;
+//		if(nodeE.getRChild() != null) {
+//			R = nodeE.getRChild().getFe();
+//		}
+//		
+//		int L = 0;
+//		
+//		if(nodeE.getLChild() != null) {
+//			L = nodeE.getLChild().getFe();
 //			
 //		}
-		
-		
-	}
+//		
+//		if(L-R == 0) {
+//			buscar(elem,root).setElem(null);
+//		}else if(L-R >= 1) {
+//			
+//			AVLNode<A> maxL = maxLeft(nodeE.getLChild());
+//			if(nodeE.getLChild() != null) {
+//			parent(maxLeft(nodeE.getLChild()),root).setLChild(nodeE.getLChild());
+//			}
+//			if(nodeE.getLChild() != null) {
+//				parent(maxLeft(nodeE.getLChild()),root).getRChild().setLChild(nodeE.getRChild());
+//			}	
+//			buscar(elem,root).setElem(maxL.getElem());
+//			
+//			
+//			
+//		}else {
+//			
+//
+//			AVLNode<A> minR = minRight(nodeE.getRChild());
+//			buscar(elem,root).setElem(minR.getElem());
+//			parent(minRight(nodeE.getRChild()),root).setRChild(null);
+//		
+//		}
+	//		
+////		if(getFE(nodeE) < 0) {
+////			
+////			AVLNode<A> maxL = maxLeft(nodeE.getLChild());
+////			
+////			nodeE.setElem(maxL.getElem());
+////			
+////			maxL = null;
+////			
+////			
+////		}
+//		
+//		
+//	}
 	
 }
