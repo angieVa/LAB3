@@ -33,7 +33,7 @@ public class FIBA implements Serializable{
 	mpT = new AVLTree<Player>();
 	
 	
-//	addPlayerDefault();
+	addPlayerDefault();
 
 		
 	}
@@ -229,21 +229,53 @@ public class FIBA implements Serializable{
 	}
 	
 	
-	public ArrayList<Player> getHighest(Player player){
+	public void getHighest(Player player){
 		
-		try {
-			players.getRoot().getNode(player);
+		
+		if(player.getType() == 3) {
 			
-			return players.getHighests(player);
+			try {
+				perT.getRoot().getNode(player);
+				perT.getHighests(player);
+				
+			} catch (ElementoNoExisteException e) {
+				
+				perT.insertRB(player);
+				perT.getHighests(player);
+				perT.deleteRB(player);
+				
+			}
 			
-		} catch (ElementoNoExisteException e) {
+		} else if(player.getType() == 4) {
 			
-			players.insertRB(player);
-			ArrayList<Player> list = players.getHighests(player);
-			players.deleteRB(player);
-			return list;
+			try {
+				tsT.getRoot().getNode(player);
+				tsT.getHighests(player);
+				
+			} catch (ElementoNoExisteException e) {
+				
+				tsT.insertRB(player);
+				tsT.getHighests(player);
+				tsT.deleteRB(player);
+				
+			}
+			
+		} else if(player.getType() == 5) {
+			
+			try {
+				ftrT.getRoot().getNode(player);
+				ftrT.getHighests(player);
+				
+			} catch (ElementoNoExisteException e) {
+				
+				ftrT.insertRB(player);
+				ftrT.getHighests(player);
+				ftrT.deleteRB(player);
+				
+			}
 			
 		}
+		
 		
 	}
 	
