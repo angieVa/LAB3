@@ -274,7 +274,7 @@ public class Controller implements Initializable{
     	Player p = fiba.getp().get(0);
     	list.getItems().add(p);
     	
-    	for(int i=1; i<17263; i++) {
+    	for(int i=1; i<fiba.getp().size(); i++) {
     		
     		Player p1 = fiba.getp().get(i);
     		Player p2 = fiba.getp().get(i-1);
@@ -325,6 +325,15 @@ public class Controller implements Initializable{
     		list.getItems().addAll(fiba.getFtr());
     		list.refresh();
     		
+    	} else if(options.getValue().equals("Per greather than")) {
+    		
+    		list.getItems().clear();
+    		double val = Double.parseDouble(standardValue.getText());
+    		Player p = new Player("","","",0,0,0,val,0,0,3);
+    		fiba.getHighest(p);
+    		list.getItems().addAll(fiba.getPer());
+    		list.refresh();
+    		
     	}
 
     }
@@ -365,7 +374,12 @@ public class Controller implements Initializable{
     	Player pl = new Player("", "",name,0,0,0,0,0,0,0);
     	
     	RedBlackNode<Player> p = fiba.getPlayers().search(pl, fiba.getPlayers().getRoot());
+
 //    	fiba.delete(p.getInfoNode());
+
+    	fiba.delete(p.getInfoNode());
+    	list.getItems().remove(p.getInfoNode());
+
     	
     	
     	Player p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),0);
@@ -409,8 +423,8 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL Location, ResourceBundle resources) {
 		
-		read();
-//		serialize(); //Colocarlo donde agregue un jugador y donde elimino 
+//		read();
+		serialize(); //Colocarlo donde agregue un jugador y donde elimino 
 		addOptions();
 		initPlayers();
 		list.refresh();
