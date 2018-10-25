@@ -34,4 +34,6 @@ public class PlayerTest extends TestCase {
 		assertTrue(resulta ==resultado2 );
 		
 	}
+	
+	
 }

@@ -30,12 +30,6 @@ public class FIBATest extends TestCase{
 		
 	}
 	
-	@Test
-	
-	public void testGetHighests() {
-		 stageOne();
-		
-	}
 	
 	@Test 
 	public void testGetSame() {
@@ -47,8 +41,9 @@ public class FIBATest extends TestCase{
 	public void testAddnewPlayer() {
 		
 		 stageOne();
-		
+		fiba.addNewPlayer(player1);
 		 
+		
 		 
 	}
 }
