@@ -316,7 +316,7 @@ public class Controller implements Initializable{
 	public void initialize(URL Location, ResourceBundle resources) {
 		
 		read();
-//		serialize(); Colocarlo donde agregue un jugador y donde elimino 
+//		serialize(); //Colocarlo donde agregue un jugador y donde elimino 
 		addOptions();
 		initPlayers();
 		
