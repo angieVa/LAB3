@@ -286,11 +286,33 @@ public class FIBA implements Serializable{
 
 	public void delete(Player elem) {
 		
-		players.deleteRB(elem);
-		perT.deleteRB(elem);;
-		tsT.deleteRB(elem);;
-		ftrT.deleteRB(elem);
-
+		
+		if(elem.getType() == 0) {
+			
+			players.deleteRB(elem);
+			
+		} else if(elem.getType() == 1) {
+			
+			gamesT.delete(elem);
+			
+		} else if(elem.getType() == 2) {
+			
+			mpT.delete(elem);
+			
+		} else if(elem.getType() == 3) {
+			
+			perT.deleteRB(elem);
+			
+		} else if(elem.getType() == 4) {
+			
+			tsT.deleteRB(elem);
+			
+		} else if(elem.getType() == 5) {
+			
+			ftrT.deleteRB(elem);
+			
+		}
+		
 		
 	}
 
