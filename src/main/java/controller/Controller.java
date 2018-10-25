@@ -11,10 +11,8 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-<<<<<<< HEAD
 import generics.ElementoNoExisteException;
-=======
->>>>>>> 10ca60946d97289133474fdaf6dd47340294e524
+
 import generics.RedBlackNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -290,12 +288,9 @@ public class Controller implements Initializable{
     		}
     		
     	}
-    	
-<<<<<<< HEAD
+
     	System.out.println(fiba.getPlayers().getPeso());
-    	
-=======
->>>>>>> 10ca60946d97289133474fdaf6dd47340294e524
+
     }	
     
         
