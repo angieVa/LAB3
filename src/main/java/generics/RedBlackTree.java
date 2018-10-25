@@ -17,9 +17,23 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 	private RedBlackNode<A> nodez = null;
 	private RedBlackNode<A> nodew = null;
 	private ArrayList<A> elements;
+	private int peso;
 	
 	
-	
+	/**
+	 * @return the peso
+	 */
+	public int getPeso() {
+		return peso;
+	}
+
+	/**
+	 * @param peso the peso to set
+	 */
+	public void setPeso(int peso) {
+		this.peso = peso;
+	}
+
 	public RedBlackTree() {
 		elements = new ArrayList<A>();
 		root = null;
@@ -225,7 +239,7 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		
 		root.setColor(BLACK);
 		creatSentinel(root);
-		
+		peso++;
 	}
 
 	
@@ -285,6 +299,7 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 			
 			deleteSentinels(root);
 			creatSentinel(root);
+			peso--;
 		} catch (ElementoNoExisteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -426,37 +441,45 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		
 	}
 	
-	@Override
-	public RedBlackNode<A> search(A elem, RedBlackNode<A> r) {
-		if(root== null) {
-			return null;
-		}
-		
-		if(r != null) {
-			
-			if(r.getInfoNode().compareTo(elem) == 0) {
-				return r;
-			}else if(r.getInfoNode().compareTo(elem) < 0) {
-				return search(elem, r.getRChild());
-			
-			}else {
-				return search(elem, r.getLChild());
-			}
-		}else {
-			return null;
-		}
-	
-		
-	}
+//	@Override
+//	public RedBlackNode<A> search(A elem, RedBlackNode<A> r) {
+//		if(root== null) {
+//			return null;
+//		}
+//		
+//		if(r != null) {
+//			
+//			if(r.getInfoNode().compareTo(elem) == 0) {
+//				return r;
+//			}else if(r.getInfoNode().compareTo(elem) < 0) {
+//				return search(elem, r.getRChild());
+//			
+//			}else {
+//				return search(elem, r.getLChild());
+//			}
+//		}else {
+//			return null;
+//		}
+//	
+//		
+//	}
 	
 	@Override
 	public ArrayList<A> getHighests(A elem){
 		
 		elements.clear();
 		
-		RedBlackNode<A> x = search(elem,root);
 		
-		return root.highests(elements, x);
+		try {
+			RedBlackNode<A>	x = root.getNode(elem);
+			
+			return root.highests(elements, x);
+			
+		} catch (ElementoNoExisteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 		
 	}
 	
@@ -465,11 +488,28 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		
 		elements.clear();
 		
-		RedBlackNode<A> x = search(elem,root);
-		
-		return root.less(elements, x);
+		RedBlackNode<A> x;
+		try {
+			x = root.getNode(elem);
+			return root.less(elements, x);
+			
+		} catch (ElementoNoExisteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 		
 	}
+	
+	@Override
+	public ArrayList<A> getSame(A elem){
+		
+		elements.clear();
+		AuxSame(root, elem);
+		return elements;
+	}
+ 
+
 	
 	
 	public void AuxSame(RedBlackNode<A> x, A elem){
@@ -501,15 +541,7 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 	}
 	}
 	
-	@Override
-	public ArrayList<A> getSame(A elem){
-		
-		elements.clear();
-		AuxSame(root, elem);
-		return elements;
-	}
- 
-
+	
 	
 
 }

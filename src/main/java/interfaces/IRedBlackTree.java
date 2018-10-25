@@ -23,8 +23,8 @@ public interface IRedBlackTree<A extends Comparable<A>> {
 	public ArrayList<A> getHighests(A elem);
 	public ArrayList<A> getLess(A elem);
 	public ArrayList<A> getSame(A elem);
-	public RedBlackNode<A> search(A elem, RedBlackNode<A> r);
-	
+//	public RedBlackNode<A> search(A elem, RedBlackNode<A> r);
+	public int getPeso();
 	
 	
 	
