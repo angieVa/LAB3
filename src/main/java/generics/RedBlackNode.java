@@ -292,7 +292,7 @@ public class RedBlackNode<A extends Comparable<A>> implements Serializable{
 			if(x.LChild != null) {
 				
 				list.add(x.LChild.elem);
-				return highests(list, x.LChild);
+				return less(list, x.LChild);
 			}else{
 				
 				return list;
