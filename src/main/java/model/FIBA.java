@@ -23,7 +23,6 @@ public class FIBA implements Serializable{
 	private IAVLTree<Player> mpT;
 	
 	
-	
 	public FIBA() {
 		
 	players = new RedBlackTree<Player>();

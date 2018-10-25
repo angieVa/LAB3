@@ -441,6 +441,7 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		
 	}
 	
+
 //	@Override
 //	public RedBlackNode<A> search(A elem, RedBlackNode<A> r) {
 //		if(root== null) {
@@ -463,7 +464,30 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 //	
 //		
 //	}
+
 	
+	public RedBlackNode<A> search(A elem, RedBlackNode<A> r) {
+		if(root== null) {
+			return null;
+		}
+		
+		if(r != null) {
+			
+			if(r.getInfoNode().compareTo(elem) == 0) {
+				return r;
+			}else if(r.getInfoNode().compareTo(elem) < 0) {
+				return search(elem, r.getRChild());
+			
+			}else {
+				return search(elem, r.getLChild());
+			}
+		}else {
+			return null;
+		}
+	
+		
+	}
+
 	@Override
 	public ArrayList<A> getHighests(A elem){
 		
@@ -508,6 +532,7 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		AuxSame(root, elem);
 		return elements;
 	}
+
  
 
 	
