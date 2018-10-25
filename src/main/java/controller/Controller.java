@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import generics.RedBlackNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -357,7 +358,14 @@ public class Controller implements Initializable{
     
     @FXML
     void butDelete(ActionEvent event) {
-
+    	
+    	String name = playerToDeleteTx.getText();
+    	Player pl = new Player("", "",name,0,0,0,0,0,0,0);
+    	
+    	RedBlackNode<Player> p = fiba.getPlayers().search(pl, fiba.getPlayers().getRoot());
+    	fiba.delete(p.getInfoNode());
+    	list.getItems().remove(p.getInfoNode());
+    	
     }
 
     @FXML
