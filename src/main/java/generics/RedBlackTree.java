@@ -443,9 +443,7 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		}else {
 			return null;
 		}
-		return r;
-		
-		
+	
 		
 	}
 	
