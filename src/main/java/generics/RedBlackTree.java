@@ -1,10 +1,11 @@
 package generics;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import interfaces.IRedBlackTree;
 
-public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A> {
+public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, Serializable {
 	
 	public static final int BLACK = 1;
 	public static final int RED = 0;

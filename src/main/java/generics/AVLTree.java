@@ -1,8 +1,10 @@
 package generics;
 
+import java.io.Serializable;
+
 import interfaces.IAVLTree;
 
-public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>{
+public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>, Serializable{
 
 	private AVLNode<A> root;
 	
