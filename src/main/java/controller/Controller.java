@@ -229,21 +229,26 @@ public class Controller implements Initializable{
 
     public void addOptions() {
     	
-    	options.getItems().add("games less than");
-    	options.getItems().add("games greather than");
-    	options.getItems().add("games same as");
-    	options.getItems().add("mp less than");
-    	options.getItems().add("mp greather than");
-    	options.getItems().add("mp same as");
-    	options.getItems().add("per less than");
-    	options.getItems().add("per greather than");
-    	options.getItems().add("per same as");
-    	options.getItems().add("ts less than");
-    	options.getItems().add("ts greather than");
-    	options.getItems().add("ts same as");
-    	options.getItems().add("ftr less than");
-    	options.getItems().add("ftr greather than");
-    	options.getItems().add("ftr same as");
+    	options.getItems().add("Sorted by games");
+    	options.getItems().add("Sorted by mp");
+    	options.getItems().add("Sorted by per");
+    	options.getItems().add("Sorted by ts");
+    	options.getItems().add("Sorted by ftr");
+    	options.getItems().add("Games less than");
+    	options.getItems().add("Games greather than");
+    	options.getItems().add("Games same as");
+    	options.getItems().add("Mp less than");
+    	options.getItems().add("Mp greather than");
+    	options.getItems().add("Mp same as");
+    	options.getItems().add("Per less than");
+    	options.getItems().add("Per greather than");
+    	options.getItems().add("Per same as");
+    	options.getItems().add("Ts less than");
+    	options.getItems().add("Ts greather than");
+    	options.getItems().add("Ts same as");
+    	options.getItems().add("Ftr less than");
+    	options.getItems().add("Ftr greather than");
+    	options.getItems().add("Ftr same as");
     		
     }
     
