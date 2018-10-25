@@ -355,15 +355,42 @@ public class Controller implements Initializable{
     		
     	} else if(options.getValue().equals("Per greather than")) {
     		
+//    		list.getItems().clear();
+//    		double val = Double.parseDouble(standardValue.getText());
+//    		Player p = new Player("","","",0,0,0,val,0,0,3);
+//    		fiba.getHighest(p);
+//    		list.getItems().addAll(fiba.getPer());
+//    		list.refresh();
+    		
+    	} else if(options.getValue().equals("Per same as")) {
+    		
     		list.getItems().clear();
     		double val = Double.parseDouble(standardValue.getText());
     		Player p = new Player("","","",0,0,0,val,0,0,3);
-    		fiba.getHighest(p);
+    		fiba.getSame(p);
     		list.getItems().addAll(fiba.getPer());
     		list.refresh();
-    		
-    	}
 
+    	} else if(options.getValue().equals("Ts same as")) {
+    		
+    		list.getItems().clear();
+    		double val = Double.parseDouble(standardValue.getText());
+    		Player p = new Player("","","",0,0,0,0,val,0,4);
+    		fiba.getSame(p);
+    		list.getItems().addAll(fiba.getTs());
+    		list.refresh();
+
+    	} else if(options.getValue().equals("Ftr same as")) {
+    		
+    		list.getItems().clear();
+    		double val = Double.parseDouble(standardValue.getText());
+    		Player p = new Player("","","",0,0,0,0,0,val,5);
+    		fiba.getSame(p);
+    		list.getItems().addAll(fiba.getFtr());
+    		list.refresh();
+
+    	}
+    	
     }
 
     @FXML

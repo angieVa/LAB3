@@ -102,14 +102,19 @@ public class RedBlackNode<A extends Comparable<A>> implements Serializable{
 	 
 	 public void getInorder(ArrayList<A> inorder) {
 		 
+		 
 		 if(!LChildLeaf()) {
 			 
 			 LChild.getInorder(inorder);
 			 
 		 }
 		 
-		 inorder.add(elem);
-		 
+		 if(elem != null) {
+			 
+			 inorder.add(elem); 
+			 
+		 }
+		
 		 if(!RChildLeaf()) {
 			 
 			 RChild.getInorder(inorder);
@@ -278,12 +283,18 @@ public class RedBlackNode<A extends Comparable<A>> implements Serializable{
 			if(x.RChild != null) {
 				
 				list.add(x.RChild.elem);
-				return highests(list, x.RChild);
-			}else{
-				
-				return list;
+				highests(list, x.RChild);
 			}
 			
+			if(x.LChild != null) {
+				
+				list.add(x.LChild.elem);
+				highests(list, x.LChild);
+			}
+			
+			
+				return list;
+
 			
 		}
 		
