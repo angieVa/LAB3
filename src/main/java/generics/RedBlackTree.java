@@ -515,7 +515,7 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		RedBlackNode<A> x;
 		try {
 			x = root.getNode(elem);
-			return root.less(elements, x);
+			return root.less(elements, x.getLChild());
 			
 		} catch (ElementoNoExisteException e) {
 			// TODO Auto-generated catch block
