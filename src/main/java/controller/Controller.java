@@ -270,7 +270,13 @@ public class Controller implements Initializable{
     public void initPlayers() {
     	
     	fiba.getPlayers().inOrder();
-    	
+//    	for(int i =0; i<fiba.getp().size(); i++) {
+//    		
+//    		list.getItems().add(fiba.getp().get(i));
+//    		
+//    	}
+//    	
+//    	
     	Player p = fiba.getp().get(0);
     	list.getItems().add(p);
     	
