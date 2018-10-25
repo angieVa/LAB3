@@ -1,6 +1,13 @@
 package controller;
 
 import model.*;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class Controller implements Initializable{
 
@@ -79,7 +87,7 @@ public class Controller implements Initializable{
     private TextField playerToDeleteTx;
 
     @FXML
-    private ListView<String> list;
+    private ListView<Player> list;
 
     @FXML
     private Label ftrTitle;
@@ -236,42 +244,12 @@ public class Controller implements Initializable{
     	options.getItems().add("ftr less than");
     	options.getItems().add("ftr greather than");
     	options.getItems().add("ftr same as");
-    	fiba.getPlayers().inOrder();
-    	
-    	for(int i=0; i<1; i++) {	
-    		Player play = (Player) fiba.getPlayers().getElements().get(i);
-    		System.out.print(play.getName());
-    	}
-    	
-    	
-    	
+    		
     }
     
-    public void initPlayers() {
-    	
-    	Player p = (Player) fiba.getPlayers().getElements().get(0);
-    	list.getItems().add(p.getName());
-    	
-    	for(int i=1; i<17263; i++) {
-    		
-    		Player play = (Player) fiba.getPlayers().getElements().get(i);
-    		Player playA = (Player) fiba.getPlayers().getElements().get(i-1);
-    		if(!play.getName().equalsIgnoreCase(playA.getName())) {
-    			
-    			list.getItems().add(play.getName());
-    			
-    		}
-    		
-    		
-    	}
-    	
-    	
-    }
-    
-    public void information() {
-    	
-    	int pos = list.getEditingIndex();
-    	Player p = (Player) fiba.getPlayers().getElements().get(pos+1);
+    @FXML
+    void update(MouseEvent event) {
+    	Player p = list.getSelectionModel().getSelectedItem();
     	nameTxt.setText(p.getName());
     	yearTxt.setText(p.getYear());
     	teamTxt.setText(p.getTeam());
@@ -281,9 +259,37 @@ public class Controller implements Initializable{
     	perTxt.setText(String.valueOf(p.getPer()));
     	tsTxt.setText(String.valueOf(p.getTs()));
     	ftrTxt.setText(String.valueOf(p.getFtr()));
+    }
+    
+    public void initPlayers() {
+    	
+    	fiba.getPlayers().inOrder();
+    	
+    	Player p = fiba.getp().get(0);
+    	list.getItems().add(p);
+    	
+    	for(int i=1; i<17263; i++) {
+    		
+    		Player p1 = fiba.getp().get(i);
+    		Player p2 = fiba.getp().get(i-1);
+    		
+    		if(!p1.getName().equals(p2.getName())) {
+    			
+    			list.getItems().add(p1);
+    			
+    		}
+    		
+    	}
+    	
+    }	
+    
+    public void information() {
+    	
     	
     	
     }
+    
+    
     
     
     @FXML
@@ -309,9 +315,88 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL Location, ResourceBundle resources) {
 		
+		read();
+//		serialize(); Colocarlo donde agregue un jugador y donde elimino 
 		addOptions();
 		initPlayers();
-		information();
+		
+	}
+	
+	public void read() {
+		
+		FileInputStream fos = null;
+		ObjectInputStream ois = null;
+		
+		try {
+			fos = new FileInputStream("data/class.dat");
+			ois = new ObjectInputStream(fos);
+			try {
+				fiba = (FIBA) ois.readObject();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				ois.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+	}	
+		
+		
+	
+	
+	public void serialize() {
+		
+		FileOutputStream fos = null;
+		ObjectOutputStream ois = null;
+		
+		try {
+			fos = new FileOutputStream("data/class.dat",true);
+			ois = new ObjectOutputStream(fos);
+			ois.writeObject(fiba);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				ois.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
 		
 	}
 

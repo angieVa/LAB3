@@ -1,9 +1,10 @@
 package generics;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RedBlackNode<A extends Comparable<A>> {
+public class RedBlackNode<A extends Comparable<A>> implements Serializable{
 
 	
 	public static final int BLACK = 1;

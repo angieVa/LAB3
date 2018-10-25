@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class Player implements Comparable<Player> {
+public class Player implements Comparable<Player>, Serializable{
 	
 	private String year;
 	private String name;
@@ -213,6 +214,8 @@ public class Player implements Comparable<Player> {
 	}
 
 
-	
+	public String toString() {
+		return name;
+	}
 
 }

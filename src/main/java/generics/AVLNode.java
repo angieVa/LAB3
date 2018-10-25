@@ -1,6 +1,8 @@
 package generics;
 
-public class AVLNode<A> {
+import java.io.Serializable;
+
+public class AVLNode<A> implements Serializable{
 
 	private A elem;
 	private int fe;
