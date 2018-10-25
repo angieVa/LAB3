@@ -274,21 +274,9 @@ public class Controller implements Initializable{
     	
     	fiba.getPlayers().inOrder();
 
-    	Player p = fiba.getp().get(0);
-    	list.getItems().add(p);
+    	list.getItems().addAll(fiba.getp());
     	
-    	for(int i=1; i<fiba.getp().size(); i++) {
-    		
-    		Player p1 = fiba.getp().get(i);
-    		Player p2 = fiba.getp().get(i-1);
-    		
-    		if(!p1.getName().equals(p2.getName())) {
-    			
-    			list.getItems().add(p1);
-    			
-    		}
-    		
-    	}
+
 
     	System.out.println(fiba.getPlayers().getPeso());
 
@@ -302,22 +290,9 @@ public class Controller implements Initializable{
     		
     		list.getItems().clear();
     		fiba.getGamesT().inOrder();
-    		
-    		Player p = fiba.getp().get(0);
-        	list.getItems().add(p);
-        	
-        	for(int i=1; i<fiba.getp().size(); i++) {
-        		
-        		Player p1 = fiba.getp().get(i);
-        		Player p2 = fiba.getp().get(i-1);
-        		
-        		if(!p1.getName().equals(p2.getName())) {
-        			
-        			list.getItems().add(p1);
-        			
-        		}
-        		
-        	}
+    	
+        	list.getItems().addAll(fiba.getp());
+  
     	
     		
     		
@@ -362,6 +337,15 @@ public class Controller implements Initializable{
     		list.getItems().addAll(fiba.getPer());
     		list.refresh();
     		
+    	}else if(options.getValue().equals("Per less than")) {
+    		list.getItems().clear();
+    		double val = Double.parseDouble(standardValue.getText());
+    		Player p = new Player("","","",0,0,0,val,0,0,3);
+    		fiba.getLess(p);
+    		list.getItems().addAll(fiba.getPer());
+    		list.refresh();
+    		
+    		
     	}
 
     }
@@ -391,6 +375,9 @@ public class Controller implements Initializable{
 		p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,5);
 		fiba.addNewPlayer(p1);		
 
+		list.getItems().clear();
+		fiba.getPlayers().inOrder();
+		list.getItems().addAll(fiba.getp());
     	serialize();	
 
     }
@@ -406,13 +393,8 @@ public class Controller implements Initializable{
 		try {
 			p = fiba.getPlayers().getRoot().getNode(pl);
 			
-//	    	fiba.delete(p.getInfoNode());
-
-	    	fiba.delete(p.getInfoNode());
 	    	list.getItems().remove(p.getInfoNode());
-
-	    	
-	    	
+    	
 	    	Player p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),0);
 	    	fiba.delete(p1);
 	    	p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),1);
@@ -426,25 +408,16 @@ public class Controller implements Initializable{
 			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),5);
 			fiba.delete(p1);	
 			
+//			list.getItems().clear();
+//			fiba.getGamesT().inOrder();
+//	    	list.getItems().addAll(fiba.getGames());
+//	    	
+
 			list.getItems().clear();
 			fiba.getPlayers().inOrder();
-
-	    	Player pla = fiba.getp().get(0);
-	    	list.getItems().add(pla);
+			list.getItems().addAll(fiba.getp());
 	    	
-	    	for(int i=1; i<fiba.getp().size(); i++) {
-	    		
-	    		Player pl1 = fiba.getp().get(i);
-	    		Player pl2 = fiba.getp().get(i-1);
-	    		
-	    		if(!pl1.getName().equals(pl2.getName())) {
-	    			
-	    			list.getItems().add(pl1);
-	    			
-	    		}
-	    		
-	    	}
-	    	
+	   
 	    	System.out.println(fiba.getPlayers().getPeso());
 			
 		} catch (ElementoNoExisteException e) {
