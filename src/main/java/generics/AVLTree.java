@@ -94,7 +94,7 @@ public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>, Serializab
 		
 		AVLNode<A> nParent = subT;
 		
-		if(n.getElem().compareTo(subT.getElem())< 0) {
+		if(n.getElem().compareTo(subT.getElem()) <= 0) {
 			
 			if(subT.getLChild() == null) {
 				subT.setLChild(n);
@@ -102,7 +102,7 @@ public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>, Serializab
 				
 				subT.setLChild(insertAVL(n,subT.getLChild()));
 				if(getFE(subT.getLChild())- getFE(subT.getRChild()) == 2) {
-					if(n.getElem().compareTo(subT.getLChild().getElem()) <0) {
+					if(n.getElem().compareTo(subT.getLChild().getElem()) <= 0) {
 						
 						nParent = leftRotate(subT);
 						

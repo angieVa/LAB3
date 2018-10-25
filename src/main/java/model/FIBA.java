@@ -136,6 +136,24 @@ public class FIBA implements Serializable{
 	}
 	
 	
+	public ArrayList<Player> getHighest(Player player){
+		
+		try {
+			players.getRoot().getNode(player);
+			
+			return players.getHighests(player);
+			
+		} catch (ElementoNoExisteException e) {
+			
+			players.insertRB(player);
+			ArrayList<Player> list = players.getHighests(player);
+			players.deleteRB(player);
+			return list;
+			
+		}
+		
+	}
+	
 	
 	
 
