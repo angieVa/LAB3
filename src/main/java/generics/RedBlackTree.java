@@ -489,7 +489,7 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 	}
 
 	@Override
-	public ArrayList<A> getHighests(A elem){
+	public ArrayList<A> getSame(A elem){
 		
 		elements.clear();
 		
@@ -497,13 +497,17 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		try {
 			RedBlackNode<A>	x = root.getNode(elem);
 			
-			return root.highests(elements, x);
+			x.getRChild().getInorder(elements);
+			
+//			return root.highests(elements, x.getRChild());
 			
 		} catch (ElementoNoExisteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
+		
+		return elements;
 		
 	}
 	
@@ -511,60 +515,83 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 	public ArrayList<A> getLess(A elem){
 		
 		elements.clear();
+//		root.less(elem);
+		return null;
+	}		
+
 		
-		RedBlackNode<A> x;
-		try {
-			x = root.getNode(elem);
-			return root.less(elements, x.getLChild());
-			
-		} catch (ElementoNoExisteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
 		
+//		RedBlackNode<A> x;
+//		try {
+//			x = root.getNode(elem);
+//			return root.less(elements, x);
+//			
+//		} catch (ElementoNoExisteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return null;
+//		}
+
+//		RedBlackNode<A> x;
+//		try {
+//			x = root.getNode(elem);
+//			return root.less(elements, x.getLChild());
+//			
+//		} catch (ElementoNoExisteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			return null;
+//		}
+//
+//		
+//	}
+
+	@Override
+	public ArrayList<A> getHighests(A elem) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
-	@Override
-	public ArrayList<A> getSame(A elem){
-		
-		elements.clear();
-		AuxSame(root, elem);
-		return elements;
-	}
+//	@Override
+//	public ArrayList<A> getSame(A elem){
+//		
+//		elements.clear();
+//		AuxSame(root, elem);
+//		return elements;
+//	}
 
  
 
 	
 	
-	public void AuxSame(RedBlackNode<A> x, A elem){
-		
-		if(x !=null) {
-		
-		if(!x.LChildLeaf()) {
-			
-			if(x.getLChild().getInfoNode() == elem ) {
-				elements.add(x.getLChild().getInfoNode());
-				AuxSame(x.getLChild(),elem);
-				
-			}
-		}
-		
-		if(x.getInfoNode() == elem) {
-			elements.add(x.getInfoNode());
-		}
-		
-		 
-		if(!x.RChildLeaf()) {
-
-			if(x.getRChild().getInfoNode() == elem ) {
-				elements.add(x.getRChild().getInfoNode());
-				AuxSame(x.getRChild(),elem);
-			}
-			
-		}
-	}
-	}
+//	public void AuxSame(RedBlackNode<A> x, A elem){
+//		
+//		if(x !=null) {
+//		
+//		if(!x.LChildLeaf()) {
+//			
+//			if(x.getLChild().getInfoNode() == elem ) {
+//				elements.add(x.getLChild().getInfoNode());
+//				AuxSame(x.getLChild(),elem);
+//				
+//			}
+//		}
+//		
+//		if(x.getInfoNode() == elem) {
+//			elements.add(x.getInfoNode());
+//		}
+//		
+//		 
+//		if(!x.RChildLeaf()) {
+//
+//			if(x.getRChild().getInfoNode() == elem ) {
+//				elements.add(x.getRChild().getInfoNode());
+//				AuxSame(x.getRChild(),elem);
+//			}
+//			
+//		}
+//	}
+//	}
 	
 	
 	
