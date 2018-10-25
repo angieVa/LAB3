@@ -15,27 +15,114 @@ import interfaces.*;
 public class FIBA implements Serializable{
 	
 	private IRedBlackTree<Player> players;
-	private IRedBlackTree<Player> statmentDouble;
-	private IAVLTree<Player> statmentInt;
+	private IRedBlackTree<Player> perT;
+	private IRedBlackTree<Player> tsT;
+	private IRedBlackTree<Player> ftrT;
+	
+	private IAVLTree<Player> gamesT;
+	private IAVLTree<Player> mpT;
 	
 	
 	public FIBA() {
 		
 	players = new RedBlackTree<Player>();
-	statmentDouble = new RedBlackTree<Player>();
-	statmentInt = new AVLTree<Player>();
+	perT = new RedBlackTree<Player>();
+	tsT = new RedBlackTree<Player>();
+	ftrT = new RedBlackTree<Player>();
+	gamesT = new AVLTree<Player>();
+	mpT = new AVLTree<Player>();
+	
+	
 //	addPlayerDefault();
 
 		
 	}
 	
+	
+	
+	public IRedBlackTree<Player> getPerT() {
+		return perT;
+	}
+
+
+
+	public void setPerT(IRedBlackTree<Player> perT) {
+		this.perT = perT;
+	}
+
+
+
+	public IRedBlackTree<Player> getTsT() {
+		return tsT;
+	}
+
+
+
+	public void setTsT(IRedBlackTree<Player> tsT) {
+		this.tsT = tsT;
+	}
+
+
+
+	public IRedBlackTree<Player> getFtrT() {
+		return ftrT;
+	}
+
+
+
+	public void setFtrT(IRedBlackTree<Player> ftrT) {
+		this.ftrT = ftrT;
+	}
+
+
+
+	public IAVLTree<Player> getGamesT() {
+		return gamesT;
+	}
+
+
+
+	public void setGamesT(IAVLTree<Player> gamesT) {
+		this.gamesT = gamesT;
+	}
+
+
+
+	public IAVLTree<Player> getMpT() {
+		return mpT;
+	}
+
+
+
+	public void setMpT(IAVLTree<Player> mpT) {
+		this.mpT = mpT;
+	}
+
+
+
 	public IRedBlackTree<Player> getPlayers() {
 		return players;
+	}
+	
+	public ArrayList<Player> getPer(){
+		return perT.getElements();
+	}
+	
+	public ArrayList<Player> getTs(){
+		return tsT.getElements();
+	}
+	
+	public ArrayList<Player> getFtr(){
+		return ftrT.getElements();
 	}
 	
 	public ArrayList<Player> getp(){
 		return players.getElements();
 	}
+	
+//	public ArrayList<Player> getGames(){
+//		return gamesT.getElements();
+//	}
 
 
 	public void setPlayers(IRedBlackTree<Player> players) {
@@ -73,6 +160,16 @@ public class FIBA implements Serializable{
 
 				Player player = new Player(year, team, name, age, games, mp, per, ts, ftr, 0);
 				players.insertRB(player);
+				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 1);
+				gamesT.insert(player);
+				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 2);
+				mpT.insert(player);
+				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 2);
+				perT.insertRB(player);
+				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 2);
+				tsT.insertRB(player);
+				player = new Player(year, team, name, age, games, mp, per, ts, ftr, 2);
+				ftrT.insertRB(player);
 				line = br.readLine();
 				
 			}
@@ -94,6 +191,36 @@ public class FIBA implements Serializable{
 		}
 
 		
+		
+	}
+	
+	public void addNewPlayer(Player p) {
+		
+		if(p.getType() == 0) {
+			
+			players.insertRB(p);
+			
+		} else if(p.getType() == 1) {
+			
+			gamesT.insert(p);
+			
+		} else if(p.getType() == 2) {
+			
+			mpT.insert(p);
+			
+		} else if(p.getType() == 3) {
+			
+			perT.insertRB(p);
+			
+		} else if(p.getType() == 4) {
+			
+			tsT.insertRB(p);
+			
+		} else if(p.getType() == 5) {
+			
+			ftrT.insertRB(p);
+			
+		}
 		
 	}
 	
@@ -126,15 +253,29 @@ public class FIBA implements Serializable{
 						ftr = Double.parseDouble(fields[9]);	
 					}
 
-					Player player = new Player(year, team, name, age, games, mp, per, ts, ftr, 0);
+					Player player = new Player(year, team, name, age, games, mp, per, ts, ftr, type);
 				
-				if(type == 3 || type == 4 || type == 5) {
+				if(type == 3) {
 					
-					statmentDouble.insertRB(player);
+					perT.insertRB(player);
 					
-				} else {
+				} else if(type == 4) {
 					
-					statmentInt.insert(player);
+					tsT.insertRB(player);
+					
+				} else if(type == 5) {
+					
+					ftrT.insertRB(player);
+					
+				}
+				
+				else if(type == 1){
+					
+					gamesT.insert(player);
+					
+				} else if(type == 2) {
+					
+					mpT.insert(player);
 					
 				}
 				
@@ -157,7 +298,7 @@ public class FIBA implements Serializable{
 
 		
 	}
-}
+
 	
 	
 	
@@ -180,6 +321,6 @@ public class FIBA implements Serializable{
 		
 	}
 	
-	
+}	
 	
 

@@ -294,10 +294,33 @@ public class Controller implements Initializable{
     	
     	if(options.getValue().equals("Sorted by games")) {
     		
-    		fiba.addPlayer(1);
-    		list.getItems().clear();
-    		initPlayers();
+    		list.getItems().removeAll();
+    		list.getItems().addAll();
     		
+    		
+    	} else if(options.getValue().equals("Sorted by mp")) {
+    		
+    		list.getItems().removeAll();
+    		list.getItems().addAll();
+    		list.refresh();
+    		
+    	} else if(options.getValue().equals("Sorted by per")) {
+    		
+    		list.getItems().removeAll();
+    		list.getItems().addAll(fiba.getPer());
+    		list.refresh();
+    		
+    	} else if(options.getValue().equals("Sorted by ts")) {
+    		
+    		list.getItems().clear();
+    		list.getItems().addAll(fiba.getTs());
+    		list.refresh();
+    		
+    	} else if(options.getValue().equals("Sorted by ftr")) {
+    		
+    		list.getItems().clear();
+    		list.getItems().addAll(fiba.getFtr());
+    		list.refresh();
     		
     	}
 
@@ -305,7 +328,38 @@ public class Controller implements Initializable{
 
     @FXML
     void butAddPlayer(ActionEvent event) {
+    	
+    	String name = nameTx.getText();
+    	String year = yearTx.getText();
+    	String team = teamTx.getText();
+    	int age = Integer.parseInt(ageTx.getText());
+    	int games = Integer.parseInt(gamesTx.getText());
+    	int mp = Integer.parseInt(mpTx.getText());
+    	double per = Double.parseDouble(perTx.getText());
+    	double ts = Double.parseDouble(tsTx.getText());
+    	double ftr = Double.parseDouble(ftrTx.getText());
+    	Player p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,0);
+    	fiba.addNewPlayer(p1);
+    	p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,1);
+		fiba.addNewPlayer(p1);
+		p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,2);
+		fiba.addNewPlayer(p1);
+		p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,3);
+		fiba.addNewPlayer(p1);
+		p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,4);
+		fiba.addNewPlayer(p1);	  
+		p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,5);
+		fiba.addNewPlayer(p1);		
 
+    	serialize();	
+
+    }
+    
+    public void deletePlayer() {
+    	
+//    	String name = playerToDeleteTx.getText();
+//    	Player p = new Player()
+    	
     }
 
     @FXML
@@ -325,6 +379,7 @@ public class Controller implements Initializable{
 //		serialize(); //Colocarlo donde agregue un jugador y donde elimino 
 		addOptions();
 		initPlayers();
+		list.refresh();
 		
 	}
 	
