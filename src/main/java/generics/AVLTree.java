@@ -170,15 +170,25 @@ public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>, Serializab
 	//RECORRIDOS
 
 	@Override
-	public ArrayList<A> inOrder() {
+	public void inOrder() {
 		
 		objects.clear();
 		auxInOrder(root);
-		return objects;
-		
 		
 	}
 	
+	
+	
+	public ArrayList<A> getObjects() {
+		return objects;
+	}
+
+
+	public void setObjects(ArrayList<A> objects) {
+		this.objects = objects;
+	}
+
+
 	public void auxInOrder(AVLNode<A> r) {
 		
 		if(r != null) {

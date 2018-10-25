@@ -270,13 +270,7 @@ public class Controller implements Initializable{
     public void initPlayers() {
     	
     	fiba.getPlayers().inOrder();
-//    	for(int i =0; i<fiba.getp().size(); i++) {
-//    		
-//    		list.getItems().add(fiba.getp().get(i));
-//    		
-//    	}
-//    	
-//    	
+
     	Player p = fiba.getp().get(0);
     	list.getItems().add(p);
     	
@@ -301,14 +295,16 @@ public class Controller implements Initializable{
     	
     	if(options.getValue().equals("Sorted by games")) {
     		
-    		list.getItems().remove(0, list.getItems().size());
-    		list.getItems().addAll();
+    		list.getItems().clear();
+    		fiba.getGamesT().inOrder();
+    		list.getItems().addAll(fiba.getGames());
     		
     		
     	} else if(options.getValue().equals("Sorted by mp")) {
     		
-    		list.getItems().remove(0, list.getItems().size());
-    		list.getItems().addAll();
+    		list.getItems().clear();
+    		fiba.getMpT().inOrder();
+    		list.getItems().addAll(fiba.getMp());
     		
     	} else if(options.getValue().equals("Sorted by per")) {
     		
@@ -368,9 +364,9 @@ public class Controller implements Initializable{
     	String name = playerToDeleteTx.getText();
     	Player pl = new Player("", "",name,0,0,0,0,0,0,0);
     	
-    	RedBlackNode<Player> p = fiba.getPlayers().search(pl, fiba.getPlayers().getRoot());
-    	fiba.delete(p.getInfoNode());
-    	list.getItems().remove(p.getInfoNode());
+//    	RedBlackNode<Player> p = fiba.getPlayers().search(pl, fiba.getPlayers().getRoot());
+//    	fiba.delete(p.getInfoNode());
+//    	list.getItems().remove(p.getInfoNode());
     	
     }
 
