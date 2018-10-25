@@ -20,7 +20,7 @@ public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>, Serializab
 	public AVLNode<A> buscar(A elem, AVLNode<A> r) {
 		if(root== null) {
 			return null;
-		}else if(r.getElem() == elem) {
+	}else if(r.getElem().compareTo(elem) == 0) {
 			return r;
 		}else if(r.getElem().compareTo(elem) < 0) {
 			return buscar(elem, r.getRChild());

@@ -394,6 +394,7 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 	
 	public void inOrder() {
 	
+		elements.clear();
 		root.getInorder(elements);
 		
 	}
@@ -433,7 +434,7 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		
 		if(r != null) {
 			
-			if(r.getInfoNode() == elem) {
+			if(r.getInfoNode().compareTo(elem) == 0) {
 				return r;
 			}else if(r.getInfoNode().compareTo(elem) < 0) {
 				return search(elem, r.getRChild());
