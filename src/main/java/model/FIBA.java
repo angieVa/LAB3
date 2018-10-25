@@ -169,10 +169,28 @@ public class FIBA implements Serializable{
 			return list;
 			
 		}
-		
-		
-	
-		
+
 	}
 
+	public ArrayList<Player> getSame(Player player){
+		
+		try {
+			players.getRoot().getNode(player);
+			
+			return players.getSame(player);
+			
+		} catch (ElementoNoExisteException e) {
+			
+			players.insertRB(player);
+			ArrayList<Player> list = players.getSame(player);
+			players.deleteRB(player);
+			return list;
+			
+		}
+
+	}
+
+	
+	
+	
 }
