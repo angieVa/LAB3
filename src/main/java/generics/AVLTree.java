@@ -1,16 +1,18 @@
 package generics;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import interfaces.IAVLTree;
 
 public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>, Serializable{
 
 	private AVLNode<A> root;
-	
+	private ArrayList<A> objects;
 	
 	public AVLTree() {
 		root = null;
+		objects = new ArrayList<A>();
 	}
 
 
@@ -168,17 +170,26 @@ public class AVLTree<A extends Comparable<A>> implements IAVLTree<A>, Serializab
 	//RECORRIDOS
 
 	@Override
-	public void inOrder(AVLNode<A> r) {
+	public ArrayList<A> inOrder() {
 		
-		if(r != null) {
-			inOrder(r.getLChild());
-			System.out.print(r.getElem() + ", ");
-			inOrder(r.getRChild());
-			
-		}
+		objects.clear();
+		auxInOrder(root);
+		return objects;
+		
 		
 	}
+	
+	public void auxInOrder(AVLNode<A> r) {
+		
+		if(r != null) {
+			auxInOrder(r.getLChild());
+			objects.add(r.getElem());
+			auxInOrder(r.getRChild());
+			
+		}
+	}
 
+	
 
 	@Override
 	public void preOrder(AVLNode<A> r) {
