@@ -288,17 +288,18 @@ public class Controller implements Initializable{
     	
     }	
     
-    public void information() {
-    	
-    	
-    	
-    }
-    
-    
-    
-    
+        
     @FXML
     void find(ActionEvent event) {
+    	
+    	if(options.getValue().equals("Sorted by games")) {
+    		
+    		fiba.addPlayer(1);
+    		list.getItems().clear();
+    		initPlayers();
+    		
+    		
+    	}
 
     }
 
