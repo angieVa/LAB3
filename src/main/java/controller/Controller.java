@@ -11,6 +11,8 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import generics.ElementoNoExisteException;
+
 import generics.RedBlackNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -230,6 +232,7 @@ public class Controller implements Initializable{
 
     public void addOptions() {
     	
+    	options.getItems().add("Sorted by name");
     	options.getItems().add("Sorted by games");
     	options.getItems().add("Sorted by mp");
     	options.getItems().add("Sorted by per");
@@ -286,14 +289,39 @@ public class Controller implements Initializable{
     		}
     		
     	}
-    	
+
+    	System.out.println(fiba.getPlayers().getPeso());
+
     }	
     
         
     @FXML
     void find(ActionEvent event) {
     	
-    	if(options.getValue().equals("Sorted by games")) {
+    	if(options.getValue().equals("Sorted by name")) {
+    		
+    		list.getItems().clear();
+    		fiba.getGamesT().inOrder();
+    		
+    		Player p = fiba.getp().get(0);
+        	list.getItems().add(p);
+        	
+        	for(int i=1; i<fiba.getp().size(); i++) {
+        		
+        		Player p1 = fiba.getp().get(i);
+        		Player p2 = fiba.getp().get(i-1);
+        		
+        		if(!p1.getName().equals(p2.getName())) {
+        			
+        			list.getItems().add(p1);
+        			
+        		}
+        		
+        	}
+    	
+    		
+    		
+    	} else if(options.getValue().equals("Sorted by games")) {
     		
     		list.getItems().clear();
     		fiba.getGamesT().inOrder();
@@ -373,46 +401,58 @@ public class Controller implements Initializable{
     	String name = playerToDeleteTx.getText();
     	Player pl = new Player("", "",name,0,0,0,0,0,0,0);
     	
-    	RedBlackNode<Player> p = fiba.getPlayers().search(pl, fiba.getPlayers().getRoot());
 
-//    	fiba.delete(p.getInfoNode());
+    	RedBlackNode<Player> p;
+		try {
+			p = fiba.getPlayers().getRoot().getNode(pl);
+			
+//	    	fiba.delete(p.getInfoNode());
 
-    	fiba.delete(p.getInfoNode());
-    	list.getItems().remove(p.getInfoNode());
+	    	fiba.delete(p.getInfoNode());
+	    	list.getItems().remove(p.getInfoNode());
 
-    	
-    	
-    	Player p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),0);
-    	fiba.delete(p1);
-    	p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),1);
-    	fiba.delete(p1);
-		p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),2);
-		fiba.delete(p1);
-		p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),3);
-		fiba.delete(p1);
-		p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),4);
-		fiba.delete(p1);	  
-		p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),5);
-		fiba.delete(p1);	
-		
-		list.getItems().clear();
-		fiba.getPlayers().inOrder();
+	    	
+	    	
+	    	Player p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),0);
+	    	fiba.delete(p1);
+	    	p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),1);
+	    	fiba.delete(p1);
+			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),2);
+			fiba.delete(p1);
+			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),3);
+			fiba.delete(p1);
+			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),4);
+			fiba.delete(p1);	  
+			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),5);
+			fiba.delete(p1);	
+			
+			list.getItems().clear();
+			fiba.getPlayers().inOrder();
 
-    	Player pla = fiba.getp().get(0);
-    	list.getItems().add(pla);
-    	
-    	for(int i=1; i<fiba.getp().size(); i++) {
-    		
-    		Player pl1 = fiba.getp().get(i);
-    		Player pl2 = fiba.getp().get(i-1);
-    		
-    		if(!p1.getName().equals(pl2.getName())) {
-    			
-    			list.getItems().add(pl1);
-    			
-    		}
-    		
-    	}
+	    	Player pla = fiba.getp().get(0);
+	    	list.getItems().add(pla);
+	    	
+	    	for(int i=1; i<fiba.getp().size(); i++) {
+	    		
+	    		Player pl1 = fiba.getp().get(i);
+	    		Player pl2 = fiba.getp().get(i-1);
+	    		
+	    		if(!pl1.getName().equals(pl2.getName())) {
+	    			
+	    			list.getItems().add(pl1);
+	    			
+	    		}
+	    		
+	    	}
+	    	
+	    	System.out.println(fiba.getPlayers().getPeso());
+			
+		} catch (ElementoNoExisteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
     }
 
     @FXML
