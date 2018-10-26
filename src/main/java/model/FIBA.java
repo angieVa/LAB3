@@ -33,7 +33,7 @@ public class FIBA implements Serializable{
 	mpT = new TreeAVL<Player>();
 	
 	
-	addPlayerDefault();
+//	addPlayerDefault();
 
 		
 	}

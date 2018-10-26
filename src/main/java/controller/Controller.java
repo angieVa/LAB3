@@ -345,8 +345,25 @@ public class Controller implements Initializable{
     		fiba.getSame(p);
     		list.getItems().addAll(fiba.getFtr());
     		list.refresh();
-    	}
-    	
+    		
+    	} else if(options.getValue().equals("Games same as")) {
+    		
+    		list.getItems().clear();
+    		int val = Integer.parseInt(standardValue.getText());
+    		Player p = new Player("","","",0,val,0,0,0,0,1);
+    		fiba.getSame(p);
+    		list.getItems().addAll(fiba.getFtr());
+    		list.refresh();
+    		
+    	} else if(options.getValue().equals("Mp same as")) {
+    		
+    		list.getItems().clear();
+    		int val = Integer.parseInt(standardValue.getText());
+    		Player p = new Player("","","",0,0,val,0,0,0,2);
+    		fiba.getSame(p);
+    		list.getItems().addAll(fiba.getFtr());
+    		list.refresh();
+    	} 
     }
 
     @FXML
@@ -456,37 +473,38 @@ public class Controller implements Initializable{
 			
 	    	Player p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),0);
 	    	fiba.delete(p1);
-	    	p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,0);
+	    	p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,0);
 	    	fiba.addNewPlayer(p1);
 	    	
 	    	p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),1);
 	    	fiba.delete(p1);
-	    	p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,1);
+	    	p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,1);
 	    	fiba.addNewPlayer(p1);
 	    	
 			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),2);
 			fiba.delete(p1);
-			p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,2);
+			p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,2);
 	    	fiba.addNewPlayer(p1);
 	    	
 			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),3);
 			fiba.delete(p1);
-			p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,3);
+			p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,3);
 	    	fiba.addNewPlayer(p1);
 	    	
 			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),4);
 			fiba.delete(p1);
-			p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,4);
+			p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,4);
 	    	fiba.addNewPlayer(p1);
 	    	
 			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),5);
 			fiba.delete(p1);
-			p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,5);
+			p1 = new Player(year,team,name,age,games,mp,per,ts,ftr,5);
 	    	fiba.addNewPlayer(p1);
 	    	
 	    	list.getItems().clear();
 			fiba.getPlayers().inOrder();
 			list.getItems().addAll(fiba.getp());	
+			
 	    	
 			
     	} catch (ElementoNoExisteException e) {
@@ -501,8 +519,8 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL Location, ResourceBundle resources) {
 		
-//		read();
-		serialize(); //Colocarlo donde agregue un jugador y donde elimino 
+		read();
+//		serialize(); //Colocarlo donde agregue un jugador y donde elimino 
 		addOptions();
 		initPlayers();
 		list.refresh();
