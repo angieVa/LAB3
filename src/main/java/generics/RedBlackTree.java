@@ -441,31 +441,6 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		
 	}
 	
-
-//	@Override
-//	public RedBlackNode<A> search(A elem, RedBlackNode<A> r) {
-//		if(root== null) {
-//			return null;
-//		}
-//		
-//		if(r != null) {
-//			
-//			if(r.getInfoNode().compareTo(elem) == 0) {
-//				return r;
-//			}else if(r.getInfoNode().compareTo(elem) < 0) {
-//				return search(elem, r.getRChild());
-//			
-//			}else {
-//				return search(elem, r.getLChild());
-//			}
-//		}else {
-//			return null;
-//		}
-//	
-//		
-//	}
-
-	
 	public RedBlackNode<A> search(A elem, RedBlackNode<A> r) {
 		if(root== null) {
 			return null;
@@ -515,8 +490,17 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 	public ArrayList<A> getLess(A elem){
 		
 		elements.clear();
-//		root.less(elem);
-		return null;
+		RedBlackNode<A> r;
+		try {
+			r = root.getNode(elem);
+			root.less(elements, r.getLChild());
+			
+		} catch (ElementoNoExisteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return elements;
 	}		
 
 		
@@ -552,47 +536,12 @@ public class RedBlackTree<A extends Comparable<A>> implements IRedBlackTree<A>, 
 		return null;
 	}
 	
-//	@Override
-//	public ArrayList<A> getSame(A elem){
-//		
-//		elements.clear();
-//		AuxSame(root, elem);
-//		return elements;
-//	}
 
  
 
 	
 	
-//	public void AuxSame(RedBlackNode<A> x, A elem){
-//		
-//		if(x !=null) {
-//		
-//		if(!x.LChildLeaf()) {
-//			
-//			if(x.getLChild().getInfoNode() == elem ) {
-//				elements.add(x.getLChild().getInfoNode());
-//				AuxSame(x.getLChild(),elem);
-//				
-//			}
-//		}
-//		
-//		if(x.getInfoNode() == elem) {
-//			elements.add(x.getInfoNode());
-//		}
-//		
-//		 
-//		if(!x.RChildLeaf()) {
-//
-//			if(x.getRChild().getInfoNode() == elem ) {
-//				elements.add(x.getRChild().getInfoNode());
-//				AuxSame(x.getRChild(),elem);
-//			}
-//			
-//		}
-//	}
-//	}
-	
+
 	
 	
 

@@ -296,21 +296,35 @@ public class RedBlackNode<A extends Comparable<A>> implements Serializable{
 				return list;
 
 			
-		}
+		} 
 		
 		public ArrayList<A> less(ArrayList<A> list, RedBlackNode<A> x){
 			
+			if(x != null) {
+				
+			
 			if(x.LChild != null) {
 				
-				list.add(x.LChild.elem);
-				less(list, x.LChild);
-			}	
-			if(x.RChild != null) {
+				less(list,x.LChild);
 					
-					list.add(x.RChild.elem);
-					less(list, x.RChild);
-			}
+			 }
+			 
+			 if(elem != null && elem.compareTo(x.getInfoNode()) < 0){
+				 
+				 list.add(elem); 
+				 
+			 }
+			
+			 if(x.RChild != null) {
+				 
 				
+				 
+				 less(list,x.RChild);
+				 
+			 }
+			 
+			}
+					
 			return list;
 			
 		}

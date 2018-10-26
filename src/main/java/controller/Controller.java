@@ -238,20 +238,10 @@ public class Controller implements Initializable{
     	options.getItems().add("Sorted by per");
     	options.getItems().add("Sorted by ts");
     	options.getItems().add("Sorted by ftr");
-    	options.getItems().add("Games less than");
-    	options.getItems().add("Games greather than");
     	options.getItems().add("Games same as");
-    	options.getItems().add("Mp less than");
-    	options.getItems().add("Mp greather than");
     	options.getItems().add("Mp same as");
-    	options.getItems().add("Per less than");
-    	options.getItems().add("Per greather than");
     	options.getItems().add("Per same as");
-    	options.getItems().add("Ts less than");
-    	options.getItems().add("Ts greather than");
     	options.getItems().add("Ts same as");
-    	options.getItems().add("Ftr less than");
-    	options.getItems().add("Ftr greather than");
     	options.getItems().add("Ftr same as");
     		
     }
@@ -328,16 +318,7 @@ public class Controller implements Initializable{
     		list.getItems().addAll(fiba.getFtr());
     		list.refresh();
     		
-    	} else if(options.getValue().equals("Per greather than")) {
-    		
-//    		list.getItems().clear();
-//    		double val = Double.parseDouble(standardValue.getText());
-//    		Player p = new Player("","","",0,0,0,val,0,0,3);
-//    		fiba.getHighest(p);
-//    		list.getItems().addAll(fiba.getPer());
-//    		list.refresh();
-    		
-    	} else if(options.getValue().equals("Per same as")) {
+    	}  else if(options.getValue().equals("Per same as")) {
     		
     		list.getItems().clear();
     		double val = Double.parseDouble(standardValue.getText());
@@ -354,14 +335,6 @@ public class Controller implements Initializable{
     		Player p = new Player("","","",0,0,0,0,val,0,4);
     		fiba.getSame(p);
     		list.getItems().addAll(fiba.getTs());
-    		list.refresh();
-
-    	}else if(options.getValue().equals("Per less than")) {
-    		list.getItems().clear();
-    		double val = Double.parseDouble(standardValue.getText());
-    		Player p = new Player("","","",0,0,0,val,0,0,3);
-    		fiba.getLess(p);
-    		list.getItems().addAll(fiba.getPer());
     		list.refresh();
 
     	} else if(options.getValue().equals("Ftr same as")) {
@@ -456,6 +429,72 @@ public class Controller implements Initializable{
 
     @FXML
     void butModify(ActionEvent event) {
+    	
+    	String n = playerToFindTx.getText();
+    	Player pl = new Player("", "",n,0,0,0,0,0,0,0);
+    	
+
+    	RedBlackNode<Player> p;
+    	
+    	try {
+			p = fiba.getPlayers().getRoot().getNode(pl);
+	    	list.getItems().remove(p.getInfoNode());
+    	
+	    	list.getItems().clear();
+			fiba.getPlayers().inOrder();
+			list.getItems().addAll(fiba.getp());
+			
+			String name = nameModTx.getText();
+			String year = yearModTx.getText();
+			String team = teamModTx.getText();
+			int age = Integer.parseInt(ageModTx.getText());
+			int games = Integer.parseInt(gamesModTx.getText());
+			int mp = Integer.parseInt(mpModTx.getText());
+			double per = Double.parseDouble(perModTx.getText());
+			double ts = Double.parseDouble(tsModTx.getText());
+			double ftr = Double.parseDouble(ftrModTx.getText());
+			
+	    	Player p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),0);
+	    	fiba.delete(p1);
+	    	p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,0);
+	    	fiba.addNewPlayer(p1);
+	    	
+	    	p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),1);
+	    	fiba.delete(p1);
+	    	p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,1);
+	    	fiba.addNewPlayer(p1);
+	    	
+			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),2);
+			fiba.delete(p1);
+			p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,2);
+	    	fiba.addNewPlayer(p1);
+	    	
+			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),3);
+			fiba.delete(p1);
+			p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,3);
+	    	fiba.addNewPlayer(p1);
+	    	
+			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),4);
+			fiba.delete(p1);
+			p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,4);
+	    	fiba.addNewPlayer(p1);
+	    	
+			p1 = new Player(p.getInfoNode().getYear(),p.getInfoNode().getTeam(),p.getInfoNode().getName(),p.getInfoNode().getAge(),p.getInfoNode().getGames(),p.getInfoNode().getMp(),p.getInfoNode().getPer(),p.getInfoNode().getTs(),p.getInfoNode().getFtr(),5);
+			fiba.delete(p1);
+			p1 = new Player(name,year,team,age,games,mp,per,ts,ftr,5);
+	    	fiba.addNewPlayer(p1);
+	    	
+	    	list.getItems().clear();
+			fiba.getPlayers().inOrder();
+			list.getItems().addAll(fiba.getp());	
+	    	
+			
+    	} catch (ElementoNoExisteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
 
     }
 
