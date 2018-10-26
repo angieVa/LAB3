@@ -22,7 +22,8 @@ class RedBlackTreeTest extends TestCase {
 	
 	@Test
 	
-	public void testInsert() {
+	public void testInsertRB() {
+		stageOne(); 
 		
 		redblackTree.insertRB(refers);
 		
@@ -31,7 +32,7 @@ class RedBlackTreeTest extends TestCase {
 	
 	@Test
 	public void testsDelete() {
-		
+		stageOne();
 		redblackTree.insertRB(refers);
 		redblackTree.deleteRB(refers);
 		
