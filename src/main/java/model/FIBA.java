@@ -306,22 +306,6 @@ public class FIBA implements Serializable{
 			}
 			
 		} else if(player.getType() == 4) {
-
-	if(player.getType() == 3) {
-			
-			try {
-				perT.getRoot().getNode(player);
-				perT.getLess(player);
-				
-			} catch (ElementoNoExisteException e) {
-				
-				perT.insertRB(player);
-				perT.getLess(player);
-				perT.deleteRB(player);
-				
-			}
-			
-		} else if(player.getType() == 4) {
 			
 			try {
 				tsT.getRoot().getNode(player);
@@ -351,118 +335,10 @@ public class FIBA implements Serializable{
 			
 		}
 		
-		
+			
 	}
 
-//	public ArrayList<Player> getSame(Player player){
-//		
-//		try {
-//			players.getRoot().getNode(player);
-//
-//			
-//			try {
-//				tsT.getRoot().getNode(player);
-//				tsT.getLess(player);
-//				
-//			} catch (ElementoNoExisteException e) {
-//				
-//				tsT.insertRB(player);
-//				tsT.getLess(player);
-//				tsT.deleteRB(player);
-//				
-//			}
-//			
-//		} else if(player.getType() == 5) {
-//			
-//			try {
-//				ftrT.getRoot().getNode(player);
-//				ftrT.getLess(player);
-//				
-//			} catch (ElementoNoExisteException e) {
-//				
-//				ftrT.insertRB(player);
-//				ftrT.getLess(player);
-//				ftrT.deleteRB(player);
-//				
-//			}
-//			
-//		}
-//		
-		
-//		try {
-//			
-//			players.getRoot().getNode(player);
-//			return players.getLess(player);
-//			
-//		} catch (ElementoNoExisteException e) {
-//			
-//			players.insertRB(player);
-//			ArrayList<Player> list = players.getLess(player);
-//			players.deleteRB(player);
-//			return list;
-//			
-//		}
 
-	}
-
-//	public void getSame(Player player){
-//		
-//		if(player.getType() == 3) {
-//			
-//			try {
-//				
-//				perT.getRoot().getNode(player);
-//				perT.getSame(player);
-//				
-//			} catch (ElementoNoExisteException e) {
-//				
-//				perT.insertRB(player);
-//				ArrayList<Player> list = players.getSame(player);
-//				perT.deleteRB(player);
-//				
-//				
-//			}
-//			
-//		} else if(player.getType() == 4) {
-//			
-//			try {
-//				
-//				tsT.getRoot().getNode(player);
-//				tsT.getSame(player);
-//				
-//			} catch (ElementoNoExisteException e) {
-//				
-//				tsT.insertRB(player);
-//				ArrayList<Player> list = players.getSame(player);
-//				tsT.deleteRB(player);
-//				
-//				
-//			}
-//			
-//			
-//		} else if(player.getType() == 5) {
-//			
-//			try {
-//				ftrT.getRoot().getNode(player);
-//				
-//				ftrT.getSame(player);
-//				
-//			} catch (ElementoNoExisteException e) {
-//				
-//				ftrT.insertRB(player);
-//				ArrayList<Player> list = players.getSame(player);
-//				ftrT.deleteRB(player);
-//				
-//				
-//			}
-//			
-//			
-//		}
-//		
-//		
-//		
-//	}
-	
 
 	public void delete(Player elem) {
 		
